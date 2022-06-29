@@ -8,10 +8,12 @@
     "dev": "run-p dev:*",
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "cross-env NODE_ENV=development netlify dev",
-    "generate:css": "npx tailwindcss -o ./app/tailwind.css",        
+    "generate:css": "npx tailwindcss -o ./app/tailwind.css",
     "start": "cross-env NODE_ENV=production netlify dev"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.5",
+    "@heroicons/react": "^1.0.6",
     "@netlify/functions": "^1.0.0",
     "@remix-run/netlify": "^1.6.3",
     "@remix-run/node": "^1.6.3",
@@ -24,6 +26,9 @@
   "devDependencies": {
     "@remix-run/dev": "^1.6.3",
     "@remix-run/eslint-config": "^1.6.3",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.2",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "eslint": "^8.15.0",
