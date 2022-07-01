@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/solid";
 import { classNames, formatPrice } from "~/utils";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";

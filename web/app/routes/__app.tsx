@@ -1,9 +1,8 @@
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+import { Dialog, Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link, Outlet } from "@remix-run/react";
 import { Fragment, useState } from "react";
 import { footerNavigation, navigation } from "~/config";
-import { classNames } from "~/utils";
 
 export default function AppLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -172,9 +171,9 @@ export default function AppLayout() {
           <div className="py-20 grid grid-cols-2 gap-8 sm:gap-y-0 sm:grid-cols-2 lg:grid-cols-4">
             <div className="grid grid-cols-1 gap-y-10 lg:col-span-2 lg:grid-cols-2 lg:gap-y-0 lg:gap-x-8">
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Account</h3>
-                <ul role="list" className="mt-6 space-y-6">
-                  {footerNavigation.account.map((item) => (
+                <h3 className="text-sm font-medium text-gray-900">Explore</h3>
+                <ul className="mt-6 space-y-6">
+                  {footerNavigation.explore.map((item) => (
                     <li key={item.name} className="text-sm">
                       <a
                         href={item.href}
@@ -187,9 +186,9 @@ export default function AppLayout() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Service</h3>
-                <ul role="list" className="mt-6 space-y-6">
-                  {footerNavigation.service.map((item) => (
+                <h3 className="text-sm font-medium text-gray-900">Company</h3>
+                <ul className="mt-6 space-y-6">
+                  {footerNavigation.company.map((item) => (
                     <li key={item.name} className="text-sm">
                       <a
                         href={item.href}
@@ -204,9 +203,9 @@ export default function AppLayout() {
             </div>
             <div className="grid grid-cols-1 gap-y-10 lg:col-span-2 lg:grid-cols-2 lg:gap-y-0 lg:gap-x-8">
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Company</h3>
-                <ul role="list" className="mt-6 space-y-6">
-                  {footerNavigation.company.map((item) => (
+                <h3 className="text-sm font-medium text-gray-900">Account</h3>
+                <ul className="mt-6 space-y-6">
+                  {footerNavigation.account.map((item) => (
                     <li key={item.name} className="text-sm">
                       <a
                         href={item.href}
@@ -220,7 +219,7 @@ export default function AppLayout() {
               </div>
               <div>
                 <h3 className="text-sm font-medium text-gray-900">Connect</h3>
-                <ul role="list" className="mt-6 space-y-6">
+                <ul className="mt-6 space-y-6">
                   {footerNavigation.connect.map((item) => (
                     <li key={item.name} className="text-sm">
                       <a

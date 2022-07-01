@@ -2,75 +2,11 @@ import { Fragment, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { MenuIcon, SearchIcon, XIcon } from "@heroicons/react/outline";
 import { Link, useLoaderData } from "@remix-run/react";
-import { footerNavigation, navigation } from "~/config";
-import { json, LoaderFunction } from "@remix-run/node";
+import { cities, footerNavigation, navigation } from "~/config";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { sanity, urlFor } from "~/services/sanity";
-import { BlogPost } from "~/types";
-
-const cities = [
-  {
-    name: "Austin, TX",
-    href: "/homes/TX/austin",
-    // imageSrc: "https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg",
-    imageSrc: require("../assets/brian-babb-XbwHrt87mQ0-unsplash.jpeg"),
-  },
-  {
-    name: "Dallas, TX",
-    href: "/homes/TX/dallas",
-    // imageSrc: "https://tailwindui.com/img/ecommerce-images/home-page-01-category-02.jpg",
-    imageSrc: require("../assets/daniel-barnes-RKdLlTyjm5g-unsplash.jpeg"),
-  },
-  {
-    name: "Houston, TX",
-    href: "/homes/TX/houston",
-    // imageSrc: "https://tailwindui.com/img/ecommerce-images/home-page-01-category-04.jpg",
-    imageSrc: require("../assets/david-veksler-VW5YwCYbPyk-unsplash.jpeg"),
-  },
-  {
-    name: "El Paso, TX",
-    href: "/homes/TX/el-paso",
-    // imageSrc: "https://tailwindui.com/img/ecommerce-images/home-page-01-category-05.jpg",
-    imageSrc: require("../assets/emmy-gaddy-b2V0fdhMVCE-unsplash.jpeg"),
-  },
-  {
-    name: "San Antonio, TX",
-    href: "/homes/TX/san-antonio",
-    // imageSrc: "https://tailwindui.com/img/ecommerce-images/home-page-01-category-03.jpg",
-    imageSrc: require("../assets/micah-carlson-qN-T-pY17Vc-unsplash.jpeg"),
-  },
-];
-const collections = [
-  {
-    name: "Handcrafted Collection",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-collection-01.jpg",
-    imageAlt:
-      "Brown leather key ring with brass metal loops and rivets on wood table.",
-    description:
-      "Keep your phone, keys, and wallet together, so you can lose everything at once.",
-  },
-  {
-    name: "Organized Desk Collection",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-collection-02.jpg",
-    imageAlt:
-      "Natural leather mouse pad on white desk next to porcelain mug and keyboard.",
-    description:
-      "The rest of the house will still be a mess, but your desk will look great.",
-  },
-  {
-    name: "Focus Collection",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-collection-03.jpg",
-    imageAlt:
-      "Person placing task list card into walnut card holder next to felt carrying case on leather desk pad.",
-    description:
-      "Be more productive than enterprise project managers with a single piece of paper.",
-  },
-];
+import type { BlogPost } from "~/types";
 
 interface LoaderData {
   posts: BlogPost[];
@@ -180,14 +116,14 @@ export default function Index() {
                   <div className="h-16 flex items-center justify-between">
                     {/* Logo (lg+) */}
                     <div className="hidden lg:flex-1 lg:flex lg:items-center">
-                      <a href="#">
+                      <Link to="/">
                         <span className="sr-only">Workflow</span>
                         <img
                           className="h-8 w-auto"
                           src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
                           alt=""
                         />
-                      </a>
+                      </Link>
                     </div>
 
                     <div className="hidden h-full lg:flex">
@@ -226,14 +162,14 @@ export default function Index() {
                     </div>
 
                     {/* Logo (lg-) */}
-                    <a href="#" className="lg:hidden">
+                    <Link to="/" className="lg:hidden">
                       <span className="sr-only">Workflow</span>
                       <img
                         src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
                         alt=""
                         className="h-8 w-auto"
                       />
-                    </a>
+                    </Link>
 
                     <div className="flex-1 flex items-center justify-end space-x-6">
                       <a
@@ -369,8 +305,7 @@ export default function Index() {
                   id="social-impact-heading"
                   className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl"
                 >
-                  <span className="block sm:inline">Level up</span>
-                  <span className="block sm:inline">your desk</span>
+                  Level up your home search
                 </h2>
                 <p className="mt-3 text-xl text-white">
                   Make your desk beautiful and organized. Post a picture to
@@ -378,12 +313,9 @@ export default function Index() {
                   announcements. Reflect on the shallow nature of existence. At
                   least you have a really nice desk setup.
                 </p>
-                <Link
-                  to={`/homes/TX/austin`}
-                  className="mt-8 w-full block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
-                >
-                  View Featured Homes
-                </Link>
+                <button className="mt-8 w-full block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto">
+                  Contact a Realtor
+                </button>
               </div>
             </div>
           </div>
@@ -401,8 +333,8 @@ export default function Index() {
             Read the Blog
           </h2>
           <p className="mt-4 text-base text-gray-500">
-            Each season, we collaborate with world-class designers to create a
-            collection inspired by the natural world.
+            Every month our realtors share their insider knowledge to help you
+            navigate today's housing market.
           </p>
 
           <div className="mt-10 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
@@ -425,8 +357,15 @@ export default function Index() {
                 <h3 className="mt-4 text-base font-semibold text-gray-900">
                   {post.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-500">
-                  {collections[0].description}
+                <p className="mt-2 text-sm text-gray-500 line-clamp-2">
+                  {post.body
+                    .find(({ _type }) => _type === "block")
+                    .children.filter(
+                      (child: { _type: string }) => child._type === "span"
+                    )
+                    .map((span: { text: string }) => span.text)
+                    .join("")
+                    .slice(0, 120)}
                 </p>
               </Link>
             ))}
@@ -443,9 +382,9 @@ export default function Index() {
             <div className="grid grid-cols-2 gap-8 xl:col-span-2">
               <div className="space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
                 <div>
-                  <h3 className="text-sm font-medium text-white">Shop</h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.shop.map((item) => (
+                  <h3 className="text-sm font-medium text-white">Explore</h3>
+                  <ul className="mt-6 space-y-6">
+                    {footerNavigation.explore.map((item) => (
                       <li key={item.name} className="text-sm">
                         <a
                           href={item.href}
@@ -459,7 +398,7 @@ export default function Index() {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-white">Company</h3>
-                  <ul role="list" className="mt-6 space-y-6">
+                  <ul className="mt-6 space-y-6">
                     {footerNavigation.company.map((item) => (
                       <li key={item.name} className="text-sm">
                         <a
@@ -476,7 +415,7 @@ export default function Index() {
               <div className="space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
                 <div>
                   <h3 className="text-sm font-medium text-white">Account</h3>
-                  <ul role="list" className="mt-6 space-y-6">
+                  <ul className="mt-6 space-y-6">
                     {footerNavigation.account.map((item) => (
                       <li key={item.name} className="text-sm">
                         <a
@@ -491,7 +430,7 @@ export default function Index() {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-white">Connect</h3>
-                  <ul role="list" className="mt-6 space-y-6">
+                  <ul className="mt-6 space-y-6">
                     {footerNavigation.connect.map((item) => (
                       <li key={item.name} className="text-sm">
                         <a
@@ -511,7 +450,7 @@ export default function Index() {
                 Sign up for our newsletter
               </h3>
               <p className="mt-6 text-sm text-gray-300">
-                The latest deals and savings, sent to your inbox weekly.
+                Be the first to know about hot new listings in your area
               </p>
               <form className="mt-2 flex sm:max-w-md">
                 <label htmlFor="email-address" className="sr-only">
