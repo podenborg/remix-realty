@@ -5,6 +5,8 @@ import { sanity, urlFor } from "~/services/sanity";
 import type { BlogPost as IBlogPost } from "~/types";
 import { PortableText } from "@portabletext/react";
 
+import CallToActionImage from "../../assets/jacques-bopp-Hh18POSx5qk-unsplash.jpeg";
+
 interface LoaderData {
   post: IBlogPost;
 }
@@ -191,7 +193,7 @@ export default function BlogPost() {
               <div className="-mt-6 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
                 <img
                   className="transform translate-x-6 translate-y-6 rounded-md object-cover object-left sm:translate-x-16 lg:translate-y-20"
-                  src={require("../../assets/jacques-bopp-Hh18POSx5qk-unsplash.jpeg")}
+                  src={CallToActionImage}
                   alt="App screenshot"
                 />
               </div>

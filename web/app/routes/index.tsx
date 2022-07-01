@@ -8,6 +8,8 @@ import { json } from "@remix-run/node";
 import { sanity, urlFor } from "~/services/sanity";
 import type { BlogPost } from "~/types";
 
+import HeroImage from "../assets/ralph-ravi-kayden-2d4lAQAlbDA-unsplash.jpeg";
+
 interface LoaderData {
   posts: BlogPost[];
 }
@@ -95,9 +97,8 @@ export default function Index() {
         {/* Decorative image and overlay */}
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
           <img
-            // src="https://tailwindui.com/img/ecommerce-images/home-page-01-hero-full-width.jpg"
-            src={require("../assets/ralph-ravi-kayden-2d4lAQAlbDA-unsplash.jpeg")}
-            alt=""
+            src={HeroImage}
+            alt="Home with pool"
             className="w-full h-full object-center object-cover"
           />
         </div>

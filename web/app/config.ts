@@ -1,3 +1,9 @@
+import AustinCoverImage from "./assets/brian-babb-XbwHrt87mQ0-unsplash.jpeg";
+import DallasCoverImage from "./assets/daniel-barnes-RKdLlTyjm5g-unsplash.jpeg";
+import HoustonCoverImage from "./assets/david-veksler-VW5YwCYbPyk-unsplash.jpeg";
+import ElPasoCoverImage from "./assets/emmy-gaddy-b2V0fdhMVCE-unsplash.jpeg";
+import SanAntonioCoverImage from "./assets/micah-carlson-qN-T-pY17Vc-unsplash.jpeg";
+
 /* Header Navigation */
 export const navigation = {
   pages: [
@@ -40,26 +46,26 @@ export const cities = [
   {
     name: "Austin, TX",
     href: "/homes/TX/austin",
-    imageSrc: require("../assets/brian-babb-XbwHrt87mQ0-unsplash.jpeg"),
+    imageSrc: AustinCoverImage,
   },
   {
     name: "Dallas, TX",
     href: "/homes/TX/dallas",
-    imageSrc: require("../assets/daniel-barnes-RKdLlTyjm5g-unsplash.jpeg"),
+    imageSrc: DallasCoverImage,
   },
   {
     name: "Houston, TX",
     href: "/homes/TX/houston",
-    imageSrc: require("../assets/david-veksler-VW5YwCYbPyk-unsplash.jpeg"),
+    imageSrc: HoustonCoverImage,
   },
   {
     name: "El Paso, TX",
     href: "/homes/TX/el-paso",
-    imageSrc: require("../assets/emmy-gaddy-b2V0fdhMVCE-unsplash.jpeg"),
+    imageSrc: ElPasoCoverImage,
   },
   {
     name: "San Antonio, TX",
     href: "/homes/TX/san-antonio",
-    imageSrc: require("../assets/micah-carlson-qN-T-pY17Vc-unsplash.jpeg"),
+    imageSrc: SanAntonioCoverImage,
   },
 ];
