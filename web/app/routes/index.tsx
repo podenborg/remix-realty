@@ -308,10 +308,10 @@ export default function Index() {
                   Level up your home search
                 </h2>
                 <p className="mt-3 text-xl text-white">
-                  Make your desk beautiful and organized. Post a picture to
-                  social media and watch it get more likes than life-changing
-                  announcements. Reflect on the shallow nature of existence. At
-                  least you have a really nice desk setup.
+                  Take your home search to the next level by consulting with one
+                  of our certified real estate agents. We'll help you find great
+                  homes that aren't listed on other sites and coach you on
+                  making offers than homeowners won't be able to refuse.
                 </p>
                 <button className="mt-8 w-full block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto">
                   Contact a Realtor
