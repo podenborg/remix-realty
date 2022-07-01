@@ -16,4 +16,19 @@ export type Home = {
   bathrooms: number;
   sqft: number;
   description: any[];
+  features: string[];
+};
+
+export type BlogPost = {
+  // Sanity defined fields
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+
+  // User defined attributes
+  publishedAt: string;
+  coverImage: any;
+  title: string;
+  slug: string;
+  body: any[];
 };

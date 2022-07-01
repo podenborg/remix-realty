@@ -1,18 +1,6 @@
 import { Fragment, useState } from "react";
-import {
-  Dialog,
-  Disclosure,
-  Menu,
-  Popover,
-  Tab,
-  Transition,
-} from "@headlessui/react";
-import {
-  MenuIcon,
-  SearchIcon,
-  ShoppingBagIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import { SearchIcon, XIcon } from "@heroicons/react/outline";
 import {
   ChevronDownIcon,
   FilterIcon,
@@ -22,21 +10,14 @@ import {
 } from "@heroicons/react/solid";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Link,
-  useLoaderData,
-  useLocation,
-  useResolvedPath,
-} from "@remix-run/react";
-import { navigation } from "~/config";
+import { Link, useLoaderData, useLocation } from "@remix-run/react";
 import { classNames, deslug, formatPrice } from "~/utils";
 import { sanity, urlFor } from "~/services/sanity";
 import type { Home } from "~/types";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaBath, FaBed, FaRuler } from "react-icons/fa";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
   { name: "Newest", href: "#", current: false },
   { name: "Price: Low to High", href: "#", current: false },
   { name: "Price: High to Low", href: "#", current: false },
@@ -63,10 +44,10 @@ const filters = [
     id: "bedrooms",
     name: "Bedrooms",
     options: [
-      { value: "studio+", label: "Studio+", checked: false },
+      { value: "studio+", label: "Studio+", checked: true },
       { value: "1+", label: "1+", checked: false },
       { value: "2+", label: "2+", checked: false },
-      { value: "3+", label: "3+", checked: true },
+      { value: "3+", label: "3+", checked: false },
       { value: "4+", label: "4+", checked: false },
     ],
   },
@@ -74,12 +55,10 @@ const filters = [
     id: "size",
     name: "Size",
     options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
+      { value: "0+ sq ft", label: "0+ sq ft", checked: true },
+      { value: "1000+ sq ft", label: "1000+ sq ft", checked: false },
+      { value: "2000+ sq ft", label: "2000+ sq ft", checked: false },
+      { value: "3000+ sq ft", label: "3000+ sq ft", checked: false },
     ],
   },
 ];
@@ -164,10 +143,7 @@ export default function HomesByCity() {
                 {/* Filters */}
                 <form className="mt-4 border-t border-gray-200">
                   <h3 className="sr-only">Categories</h3>
-                  <ul
-                    role="list"
-                    className="font-medium text-gray-900 px-2 py-3"
-                  >
+                  <ul className="font-medium text-gray-900 px-2 py-3">
                     {subCategories.map((category) => (
                       <li key={category.name}>
                         <a href={category.href} className="block px-2 py-3">
@@ -320,10 +296,7 @@ export default function HomesByCity() {
             {/* Filters */}
             <form className="hidden lg:block">
               <h3 className="sr-only">Categories</h3>
-              <ul
-                role="list"
-                className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200"
-              >
+              <ul className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
                 {subCategories.map((category) => (
                   <li key={category.name}>
                     <a href={category.href}>{category.name}</a>
@@ -411,25 +384,33 @@ export default function HomesByCity() {
                           className="w-full h-full object-center object-cover"
                         />
                       </div>
-                      <h3 className="mt-4 font-medium text-gray-900">
+                      <h3 className="mt-4 text-base font-medium text-gray-900">
                         {home.address}
                       </h3>
-                      <p className="text-gray-500 italic">
-                        {/* {home.bedrooms} bd, {home.bathrooms} ba */}3 bd, 2
-                        ba
-                      </p>
-                      <p className="mt-2 font-medium text-gray-900">
+
+                      <ol className="mt-2 flex items-center space-x-3">
+                        <li className="flex items-center">
+                          <FaBed className="text-gray-400" />
+                          <span className="ml-1 text-gray-500 font-medium text-sm">
+                            {home.bedrooms} bd
+                          </span>
+                        </li>
+                        <li className="flex items-center">
+                          <FaBath className="text-gray-400" />
+                          <span className="ml-1 text-gray-500 font-medium text-sm">
+                            {home.bathrooms} ba
+                          </span>
+                        </li>
+                        <li className="flex items-center">
+                          <FaRuler className="text-gray-400" />
+                          <span className="ml-1 text-gray-500 font-medium text-sm">
+                            {home.sqft} sqft
+                          </span>
+                        </li>
+                      </ol>
+                      <p className="mt-3 font-medium text-gray-900">
                         {formatPrice(home.price)}
                       </p>
-                      {/* <div className="absolute top-5 right-5">
-                        <button className="opacity-60 hover:opacity-90">
-                          {true ? (
-                            <FaRegHeart className="text-white h-10 w-10" />
-                          ) : (
-                            <FaHeart className="text-rose-400 h-10 w-10" />
-                          )}
-                        </button>
-                      </div> */}
                     </Link>
                   );
                 })

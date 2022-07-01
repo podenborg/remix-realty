@@ -10,15 +10,20 @@ import { Link, useLoaderData, useParams } from "@remix-run/react";
 import { PortableText } from "@portabletext/react";
 import { FaBath, FaBed, FaRuler } from "react-icons/fa";
 
+/* Date Utils */
+import add from "date-fns/add";
+import sub from "date-fns/sub";
+import format from "date-fns/format";
+
 const dates = [
-  { dayOfWeek: "TUE", date: "28", available: false },
-  { dayOfWeek: "WED", date: "29", available: false },
-  { dayOfWeek: "THU", date: "30", available: true },
-  { dayOfWeek: "FRI", date: "1", available: true },
-  { dayOfWeek: "SAT", date: "2", available: true },
-  { dayOfWeek: "SUN", date: "3", available: true },
-  { dayOfWeek: "MON", date: "4", available: true },
-  { dayOfWeek: "TUE", date: "5", available: true },
+  { date: sub(new Date(), { days: 2 }), available: false },
+  { date: sub(new Date(), { days: 1 }), available: false },
+  { date: new Date(), available: true },
+  { date: add(new Date(), { days: 1 }), available: true },
+  { date: add(new Date(), { days: 2 }), available: true },
+  { date: add(new Date(), { days: 3 }), available: true },
+  { date: add(new Date(), { days: 4 }), available: true },
+  { date: add(new Date(), { days: 5 }), available: true },
 ];
 
 const product = {
@@ -72,46 +77,6 @@ const product = {
   ],
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-};
-const reviews = {
-  href: "#",
-  average: 4,
-  totalCount: 117,
-  featured: [
-    {
-      id: 1,
-      title: "This is the best white t-shirt out there",
-      rating: 5,
-      content: `
-        <p>I've searched my entire life for a t-shirt that reflects every color in the visible spectrum. Scientists said it couldn't be done, but when I look at this shirt, I see white light bouncing right back into my eyes. Incredible!</p>
-      `,
-      author: "Mark Edwards",
-      avatarSrc:
-        "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      title: "Adds the perfect variety to my wardrobe",
-      rating: 4,
-      content: `
-        <p>I used to be one of those unbearable minimalists who only wore the same black v-necks every day. Now, I have expanded my wardrobe with three new crewneck options! Leaving off one star only because I wish the heather gray was more gray.</p>
-      `,
-      author: "Blake Reid",
-      avatarSrc:
-        "https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80",
-    },
-    {
-      id: 3,
-      title: "All good things come in 6-Packs",
-      rating: 5,
-      content: `
-        <p>Tasty beverages, strong abs that will never be seen due to aforementioned tasty beverages, and these Basic Tees!</p>
-      `,
-      author: "Ben Russel",
-      avatarSrc:
-        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  ],
 };
 
 interface LoaderData {
@@ -202,7 +167,7 @@ export default function HomeDetails() {
 
       {/* Image gallery */}
       <div className="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:grid lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-        <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
+        <div className="aspect-w-3 aspect-h-4 sm:rounded-lg overflow-hidden lg:block">
           <img
             alt={`${home.address} - Media 1`}
             src={urlFor(home.media[0]).auto("format").url()}
@@ -225,7 +190,7 @@ export default function HomeDetails() {
             />
           </div>
         </div>
-        <div className="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
+        <div className="hidden lg:block aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
           <img
             alt={`${home.address} - Media 4`}
             src={urlFor(home.media[3]).auto("format").url()}
@@ -250,7 +215,7 @@ export default function HomeDetails() {
           <h2 className="sr-only">Home information</h2>
           <p className="text-3xl text-gray-900">{formatPrice(home.price)}</p>
 
-          {/* Reviews */}
+          {/* Estimated Mortgage */}
           <div className="mt-3">
             <h3 className="sr-only">Estimated Mortgage</h3>
             <div className="flex items-center">
@@ -287,7 +252,7 @@ export default function HomeDetails() {
               </ol>
             </div>
 
-            {/* Tour Dates */}
+            {/* Schedule Tour Widget */}
             <div className="mt-10">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm text-gray-900 font-medium">Dates</h3>
@@ -307,7 +272,7 @@ export default function HomeDetails() {
                 <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                   {dates.map((date) => (
                     <RadioGroup.Option
-                      key={date.date}
+                      key={date.date.getMilliseconds()}
                       value={date.date}
                       disabled={!date.available}
                       className={({ active }) =>
@@ -326,8 +291,8 @@ export default function HomeDetails() {
                             as="p"
                             className="flex flex-col justify-center items-center"
                           >
-                            <span>{date.dayOfWeek}</span>
-                            <span>{date.date}</span>
+                            <span>{format(date.date, "iii")}</span>
+                            <span>{format(date.date, "d")}</span>
                           </RadioGroup.Label>
                           {date.available ? (
                             <span
@@ -379,7 +344,7 @@ export default function HomeDetails() {
         </div>
 
         <div className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-          {/* Description and details */}
+          {/* Description and features */}
           <div>
             <h3 className="sr-only">Description</h3>
 
@@ -388,90 +353,22 @@ export default function HomeDetails() {
             </div>
           </div>
 
-          {/* <div className="mt-10">
-            <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
+          {home.features.length > 0 ? (
+            <div className="mt-10">
+              <h3 className="text-sm font-medium text-gray-900">Features</h3>
 
-            <div className="mt-4">
-              <ul role="list" className="pl-4 list-disc text-sm space-y-2">
-                {product.highlights.map((highlight) => (
-                  <li key={highlight} className="text-gray-400">
-                    <span className="text-gray-600">{highlight}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-4">
+                <ul className="pl-4 list-disc text-sm space-y-2">
+                  {home.features.map((feature, i) => (
+                    <li key={`feature-${i}`} className="text-gray-400">
+                      <span className="text-gray-600">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div> */}
-
-          {/* <section aria-labelledby="shipping-heading" className="mt-10">
-            <h2
-              id="shipping-heading"
-              className="text-sm font-medium text-gray-900"
-            >
-              Details
-            </h2>
-
-            <div className="mt-4 space-y-6">
-              <p className="text-sm text-gray-600">{product.details}</p>
-            </div>
-          </section> */}
+          ) : null}
         </div>
-
-        {/* <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">          
-          <section
-            aria-labelledby="reviews-heading"
-            className="border-t border-gray-200 pt-10 lg:pt-16"
-          >
-            <h2 id="reviews-heading" className="sr-only">
-              Reviews
-            </h2>
-
-            <div className="space-y-10">
-              {reviews.featured.map((review) => (
-                <div key={review.id} className="flex flex-col sm:flex-row">
-                  <div className="mt-6 order-2 sm:mt-0 sm:ml-16">
-                    <h3 className="text-sm font-medium text-gray-900">
-                      {review.title}
-                    </h3>
-                    <p className="sr-only">{review.rating} out of 5 stars</p>
-
-                    <div
-                      className="mt-3 space-y-6 text-sm text-gray-600"
-                      dangerouslySetInnerHTML={{ __html: review.content }}
-                    />
-                  </div>
-
-                  <div className="order-1 flex items-center sm:flex-col sm:items-start">
-                    <img
-                      src={review.avatarSrc}
-                      alt={`${review.author}.`}
-                      className="h-12 w-12 rounded-full"
-                    />
-
-                    <div className="ml-4 sm:ml-0 sm:mt-4">
-                      <p className="text-sm font-medium text-gray-900">
-                        {review.author}
-                      </p>
-                      <div className="mt-2 flex items-center">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={classNames(
-                              review.rating > rating
-                                ? "text-gray-900"
-                                : "text-gray-200",
-                              "h-5 w-5 flex-shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div> */}
       </div>
 
       <section aria-labelledby="related-products-heading" className="bg-white">
@@ -499,7 +396,7 @@ export default function HomeDetails() {
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
-                    <h3 className="text-sm text-gray-700">
+                    <h3 className="text-sm font-semibold text-gray-700">
                       <a href={product.href}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {similarHome.address}
